@@ -25,6 +25,7 @@ class _Dashboard extends State<Dashboard> {
           color: Colors.white,
           padding: EdgeInsets.all(16.0),
           child: Column(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
                 onTap: () {
@@ -37,8 +38,7 @@ class _Dashboard extends State<Dashboard> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 70,
-                  padding: EdgeInsets.only(top: 8.0),
+                  height: 120,
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
@@ -69,7 +69,7 @@ class _Dashboard extends State<Dashboard> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 70,
+                  height: 120,
                   padding: EdgeInsets.only(top: 8.0),
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -101,7 +101,7 @@ class _Dashboard extends State<Dashboard> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 70,
+                  height: 120,
                   padding: EdgeInsets.only(top: 8.0),
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -132,7 +132,7 @@ class _Dashboard extends State<Dashboard> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 70,
+                  height: 120,
                   padding: EdgeInsets.only(top: 8.0),
                   child: Card(
                     shape: RoundedRectangleBorder(
