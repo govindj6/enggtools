@@ -12,11 +12,15 @@ class SwitchGearSelection extends StatefulWidget {
 }
 
 class _SwitchGearSelection extends State<SwitchGearSelection> {
+  final txtValueController = TextEditingController();
   late String selectedOption;
-  List<KeyValue> keyValueList = [
-    new KeyValue('Ful Load Current :', '37.44 Amp'),
-    new KeyValue('Ful Load Current :', '37.44 Amp')
-  ];
+  List<KeyValue> keyValueList = [];
+
+  @override
+  void dispose() {
+    txtValueController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -41,6 +45,7 @@ class _SwitchGearSelection extends State<SwitchGearSelection> {
                   border: OutlineInputBorder(),
                   labelText: 'Enter Value',
                 ),
+                controller: txtValueController,
               ),
               Container(
                 margin: EdgeInsets.only(top: 10.0),
@@ -89,9 +94,31 @@ class _SwitchGearSelection extends State<SwitchGearSelection> {
                 child: ElevatedButton(
                   child: Text('Convert'),
                   onPressed: () {
-                    setState(() {
-                      print(keyValueList.length);
-                    });
+                    if (txtValueController.text.isNotEmpty) {
+                      setState(() {
+                        keyValueList.clear();
+                        keyValueList.add(
+                            new KeyValue('Ful Load Current :', '54.46 Amp.'));
+                        keyValueList
+                            .add(new KeyValue('Starter Type:', 'Star-Delta'));
+                        keyValueList.add(new KeyValue(
+                            'Overload Relay (min.) :', '38.12 Amp.'));
+                        keyValueList.add(new KeyValue(
+                            'Overload Relay (max.) :', '65.32 Amp.'));
+                        keyValueList
+                            .add(new KeyValue('Contactor :', '0.00 Amp.'));
+                        keyValueList.add(
+                            new KeyValue('Contactor Star :', '17.97 Amp.'));
+                        keyValueList.add(
+                            new KeyValue('Contactor Main :', '31.59 Amp.'));
+                        keyValueList.add(
+                            new KeyValue('Contactor Delta :', '39.59 Amp.'));
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Please enter the value"),
+                      ));
+                    }
                   },
                 ),
               ),
@@ -115,27 +142,29 @@ class _SwitchGearSelection extends State<SwitchGearSelection> {
 
   List<Widget> _getListData() {
     List<Widget> widgets = [];
-    for (int i = 0; i < 50; i++) {
+    keyValueList.forEach((element) {
       widgets.add(Padding(
           padding: EdgeInsets.all(10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Key',
+                element.key,
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               ),
-              Text('Value',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.grey[800]))
+              Text(
+                element.value,
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey[800]),
+              )
             ],
           )));
-    }
+    });
     return widgets;
   }
 }
