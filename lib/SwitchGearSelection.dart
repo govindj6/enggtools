@@ -1,3 +1,4 @@
+import 'package:enggtools/entities/KeyValue.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,17 @@ class SwitchGearSelection extends StatefulWidget {
 }
 
 class _SwitchGearSelection extends State<SwitchGearSelection> {
-  String selectedOption = "KW";
+  late String selectedOption;
+  List<KeyValue> keyValueList = [
+    new KeyValue('Ful Load Current :', '37.44 Amp'),
+    new KeyValue('Ful Load Current :', '37.44 Amp')
+  ];
+
+  @override
+  void initState() {
+    selectedOption = "kw";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +89,53 @@ class _SwitchGearSelection extends State<SwitchGearSelection> {
                 child: ElevatedButton(
                   child: Text('Convert'),
                   onPressed: () {
-                    print('Converted');
+                    setState(() {
+                      print(keyValueList.length);
+                    });
                   },
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: ListView.separated(
+                    itemCount: _getListData().length,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        Divider(height: 1),
+                    itemBuilder: (BuildContext context, int index) {
+                      return _getListData().elementAt(index);
+                    },
+                  ),
                 ),
               ),
             ],
           ),
         ));
+  }
+
+  List<Widget> _getListData() {
+    List<Widget> widgets = [];
+    for (int i = 0; i < 50; i++) {
+      widgets.add(Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Key',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+              Text('Value',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.grey[800]))
+            ],
+          )));
+    }
+    return widgets;
   }
 }
